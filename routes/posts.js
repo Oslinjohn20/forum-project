@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 
+const Post = require("../models/Post")
+
 // @route   GET api/posts
 // @desc    Get all posts 
 // @access  Public
