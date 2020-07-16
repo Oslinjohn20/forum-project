@@ -8,8 +8,16 @@ const PostSchema = mongoose.Schema({
 
 	post: {
 		type: String,
-		required: true,
+		
 	},
+	type: {
+		type: String,
+		default: "Question"
+	},
+	date: {
+		type: Date,
+		default: Date.now
+	}
 });
 
 module.exports = mongoose.model("post", PostSchema);

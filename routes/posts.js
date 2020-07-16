@@ -1,17 +1,26 @@
 const express = require("express");
 const router = express.Router();
 
-const Post = require("../models/Post")
+const User = require("../models/User");
+const Post = require("../models/Post");
 
 // @route   GET api/posts
-// @desc    Get all posts 
+// @desc    Get all posts
 // @access  Public
-router.get("/", (req, res) => {
-	res.send("Posts made by user");
+router.get("/", async (req, res) => {
+	try {
+		const posts = await Post.find({ user: req.user.id }).sort({
+			date: -1
+		});
+		res.json(posts);
+	} catch (err) {
+		console.error(err.message);
+		res.status(400).send("No posts found")
+	}
 });
 
 // @route   POST api/posts
-// @desc    Add a new post  
+// @desc    Add a new post
 // @access  Public
 router.post("/", (req, res) => {
 	res.send("Post made");
