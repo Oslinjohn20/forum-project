@@ -22,7 +22,7 @@ export default (state, action) => {
 		case ADD_POST:
 			return {
 				...state,
-				posts: [actions.payload, ...state.posts],
+				posts: [action.payload, ...state.posts],
 				loading: false,
 			};
 		case DELETE_POST:

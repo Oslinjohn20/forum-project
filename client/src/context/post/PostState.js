@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useReducer} from "react";
 import axios from "axios";
 import PostContext from "./postContext";
 import postReducer from "./postReducer";
@@ -22,7 +22,7 @@ const PostState = (props) => {
 		error: null,
 	};
 
-	const [state, dispatch] = useReducer(contactReducer, initialState);
+	const [state, dispatch] = useReducer(postReducer, initialState);
 
 	//Getting Posts
 	const getPosts = async () => {
