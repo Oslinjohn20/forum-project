@@ -3,19 +3,13 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import AuthContext from "../../context/auth/authContext";
 
-import "../../App.css";
-
-
 const Navbar = ({ title }) => {
 	const authContext = useContext(AuthContext);
-	
 
 	const { isAuthenticated, logout, user } = authContext;
-	
- 
+
 	const onLogout = () => {
 		logout();
-		
 	};
 
 	const authLinks = (
@@ -49,10 +43,7 @@ const Navbar = ({ title }) => {
 
 	return (
 		<div className="navbar bg-primary">
-			<h1>
-				
-				{title}
-			</h1>
+			<h1>{title}</h1>
 			<ul>{isAuthenticated ? authLinks : guestLinks}</ul>
 		</div>
 	);
@@ -60,12 +51,10 @@ const Navbar = ({ title }) => {
 
 Navbar.propTypes = {
 	title: PropTypes.string.isRequired,
-	
 };
 
 Navbar.defaultProps = {
 	title: "Wrench Forum",
-
 };
 
 export default Navbar;

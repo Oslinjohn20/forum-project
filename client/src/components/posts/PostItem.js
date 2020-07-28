@@ -15,25 +15,32 @@ const PostItem = (post) => {
     };
 
     return (
-        <div>
-            <h3 className="text-primary text-right">
-                {post}
-                {" "}
-                <span
-                    style={{ float: "right" }}
-                    className={"badge" + (type === "question" ? "badge badge-succes" : "badge-primary")}>
-                    
-                </span>
-            </h3>
-            <p>
-                <button className="btn btn-dark btn-sm"
-                    onClick={() => setCurrent(post)}>
-                    Edit
-                </button>
-                <button className="bt btn-danger btn-sm" onClick={onDelete}></button>
-            </p>
-        </div>
-    );
+			<div>
+				<h3 className="text-primary text-right">
+					{post}{" "}
+					<span
+						style={{ float: "right" }}
+						className={
+							"badge" +
+							(type === "question" ? "badge badge-succes" : "badge-primary")
+						}
+					>
+						{type.charAt(0).toUpperCase() + type.slice(1)}
+					</span>
+				</h3>
+				<p>
+					<button
+						className="btn btn-dark btn-sm"
+						onClick={() => setCurrent(post)}
+					>
+						Edit
+					</button>
+					<button className="bt btn-danger btn-sm" onClick={onDelete}>
+						Delete
+					</button>
+				</p>
+			</div>
+		);
 };
 
 PostItem.propTypes = {

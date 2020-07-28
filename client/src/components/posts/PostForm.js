@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import PostContext from "../../context/post/postContext";
 
-const Post = () => {
+const PostForm = () => {
 	const postContext = useContext(PostContext);
 
 	const { addPost, updatePost, clearCurrent, current } = postContext;
@@ -18,7 +18,7 @@ const Post = () => {
 	}, [postContext, current]);
 
 	const [post, setPost] = useState({
-		post: [""],
+		post: "",
 		type: "question",
 	});
 
@@ -65,20 +65,26 @@ const Post = () => {
 				value="answer"
 				checked={type === "answer"}
 				onChange={onChange}
-            />
-            Answer{" "}
-            <div>
-                {current && (
-                    <div>
-                        <button className="btn btn-light btn-block" onClick={clearAll}>
-                            Clear
-                        </button>
-                    </div>
-
-                )}
-            </div>
+			/>
+			Answer
+			<div>
+				<input
+					type="submit"
+					value={current ? "Update Post" : "Add Post"}
+					className="btn btn-primary btn-block"
+				/>
+			</div>
+			<div>
+				{current && (
+					<div>
+						<button className="btn btn-light btn-block" onClick={clearAll}>
+							Clear
+						</button>
+					</div>
+				)}
+			</div>
 		</form>
 	);
 };
 
-export default Post;
+export default PostForm;

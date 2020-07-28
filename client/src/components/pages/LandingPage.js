@@ -1,24 +1,24 @@
 import React, { useEffect, useContext } from "react";
-import Post from "../posts/Post";
+import PostForm from "../posts/PostForm";
 import PostFilter from "../posts/PostFilter";
 import Posts from "../posts/Posts";
 import AuthContext from "../../context/auth/authContext";
-import PostContext from "../../context/post/postContext"
+
 
 const LandingPage = () => {
 	
-	const postContext = useContext(PostContext);
+	const authContext = useContext(AuthContext);
 
 	useEffect(() => {
 		
-		postContext.loadPost();
+		authContext.loadUser();
 		// eslint-disable-next-line
 	}, []);
 
 	return (
 		<div className="grid-2">
 			<div>
-				<Post />
+				<PostForm />
 			</div>
 			<div>
 				<PostFilter />

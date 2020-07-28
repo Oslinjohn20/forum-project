@@ -20,14 +20,22 @@ const Posts = () => {
 				<TransitionGroup>
 					{filtered !== null
 						? filtered.map((post) => (
-								<CSSTransition key={post._id} timeout={500} classNames="item">
-									<PostItem post={post} />
-								</CSSTransition>
+							<CSSTransition
+								key={post._id}
+								timeout={500}
+								classNames="item"
+							>
+								<PostItem post={post} />
+							</CSSTransition>
 						  ))
 						: posts.map((post) => (
-								<CSSTransition key={post._id} timeout={500} classNames="item">
-									<PostItem post={post} />
-								</CSSTransition>
+							<CSSTransition
+								key={post._id}
+								timeout={500}
+								classNames="item"
+							>
+								<PostItem post={post} />
+							</CSSTransition>
 						  ))}
 				</TransitionGroup>
 			) : (
