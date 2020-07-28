@@ -11,7 +11,7 @@ const Login = (props) => {
 
 	useEffect(() => {
 		if (isAuthenticated) {
-			props.history.push("/");
+			props.history.push("/landingpage");
 		}
 
 		if (error === "Invalid Credentials ") {
@@ -43,12 +43,12 @@ const Login = (props) => {
 	};
 
 	return (
-		<div >
+		<div className="form-container">
 			<h1>
-				Account <span >Login</span>
+				Account <span className="text-primary">Login</span>
 			</h1>
 			<form onSubmit={onSubmit}>
-				<div >
+				<div className="form-group">
 					<label htmlFor="email">Email Address</label>
 					<input
 						type="email"
@@ -58,7 +58,7 @@ const Login = (props) => {
 						required
 					/>
 				</div>
-				<div >
+				<div className="form-group">
 					<label htmlFor="password">Password</label>
 					<input
 						type="password"
@@ -72,7 +72,7 @@ const Login = (props) => {
 				<input
 					type="submit"
 					value="Login"
-					
+					className="btn btn-primary btn-block"
 				/>
 			</form>
 		</div>

@@ -5,19 +5,19 @@ const jwt = require("jsonwebtoken");
 const config = require("config");
 const auth = require("../middelware/auth");
 const { check, validationResult } = require("express-validator");
+
 const User = require("../models/User");
 
 // @route   GET api/auth
 // @desc    Get logged in user
 // @access  Private
-router.get("/",auth, async (req, res) => {
+router.get("/", auth, async (req, res) => {
 	try {
 		const user = await User.findById(req.user.id).select("-password");
 		res.json(user);
-		
 	} catch (err) {
 		console.error(err.message);
-		res.status(500).send("Server Error")
+		res.status(500).send("Server Error");
 	}
 });
 
@@ -27,8 +27,8 @@ router.get("/",auth, async (req, res) => {
 router.post(
 	"/",
 	[
-		check("email", "Please include a valid email"),
-		check("password", "Password is required"),
+		check("email", "Please include a valid email").isEmail(),
+		check("password", "Password is required").exists(),
 	],
 	async (req, res) => {
 		const errors = validationResult(req);
@@ -70,11 +70,9 @@ router.post(
 			);
 		} catch (err) {
 			console.error(err.message);
-			res.status(500).json({ msg: "Server Error" });
+			res.status(500).send("Server Error");
 		}
 	}
 );
-
-module.exports = router;
 
 module.exports = router;

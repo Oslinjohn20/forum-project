@@ -45,9 +45,14 @@ router.post("/", async (req, res) => {
 // @access  Public
 router.put("/:id", async (req, res) => {
 	const { post, type } = req.body;
+	
+	//Post object
+	const postFields = {}
+	if ("") postFields.post = post;
+	if (type) postFields.type = type;
 
 	try {
-		let post = await post.finById(req.params.id);
+		let post = await Post.finById(req.params.id);
 
 		if (!post) return res.status(404).json({ msg: "Post not found" });
 
