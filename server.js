@@ -18,4 +18,10 @@ app.use("/api/users", require("./routes/users"));
 app.use("/api/auth", require("./routes/auth"));
 app.use("/api/posts", require("./routes/posts"));
 
+// Getting the data from the database 
+app.get("/api/posts", (req, res) => {
+    const posts = data.posts
+    res.send(posts)
+})
+
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));

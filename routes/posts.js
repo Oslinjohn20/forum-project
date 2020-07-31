@@ -25,7 +25,7 @@ router.get("/", auth, async (req, res) => {
 // @desc    Add a new post
 // @access  Public
 router.post(
-	"/",
+	"/posts",
 	[check("post", "Post is required").not().isEmpty()],
 	async (req, res) => {
 		const errors = validationResult(req);

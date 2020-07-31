@@ -1,4 +1,0 @@
-{
-	"mongoURI": "mongodb+srv://Oslin123:oslin123@forum.c4hl9.mongodb.net/Forum?retryWrites=true&w=majority",
-	"jwtSecret": "secret"
-}
