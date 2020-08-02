@@ -1,4 +1,4 @@
-import React, {useReducer} from "react";
+import React, { useReducer } from "react";
 import axios from "axios";
 import PostContext from "./postContext";
 import postReducer from "./postReducer";
@@ -6,6 +6,7 @@ import {
 	GET_POSTS,
 	ADD_POST,
 	DELETE_POST,
+	UPDATE_POST,
 	SET_CURRENT,
 	CLEAR_CURRENT,
 	FILTER_POSTS,
@@ -81,6 +82,29 @@ const PostState = (props) => {
 		}
 	};
 
+	//Update Post
+	const updatePost = async (post) => {
+		const config = {
+			headers: {
+				"Content-Type": "application/json",
+			},
+		};
+
+		try {
+			const res = await axios.put(
+				`/api/contacts/${post._id}`,
+				post,
+				config
+			);
+			dispatch({ type: UPDATE_POST, payload: res.data})
+		} catch (err) {
+			dispatch({
+				type: POST_ERROR,
+				payload: err.response.msg,
+			})
+		}
+	}
+
 	// Clear Posts
 	const clearPosts = () => {
 		dispatch({ type: CLEAR_POSTS });
@@ -107,29 +131,29 @@ const PostState = (props) => {
 	//Clear Filter
 	const clearFilter = () => {
 		dispatch({ type: CLEAR_FILTER });
-    };
-    
+	};
 
-    return (
-        <PostContext.Provider
-            value={{
-                posts: state.posts,
-                current: state.current,
-                filtered: state.filtered,
-                error: state.error,
-                addPost,
-                deletePost,
-                setCurrent,
-                clearCurrent,
-                filterPosts,
-                clearFilter,
-                getPosts,
-                clearPosts,
-            }}
-        >
-            {props.children}
-        </PostContext.Provider>
-    )
+	return (
+		<PostContext.Provider
+			value={{
+				post: state.post,
+				current: state.current,
+				filtered: state.filtered,
+				error: state.error,
+				getPosts,
+				addPost,
+				deletePost,
+				updatePost,
+				setCurrent,
+				clearCurrent,
+				filterPosts,
+				clearFilter,
+				clearPosts,
+			}}
+		>
+			{props.children}
+		</PostContext.Provider>
+	);
 };
 
 export default PostState;

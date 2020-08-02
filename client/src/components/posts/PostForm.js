@@ -11,20 +11,20 @@ const PostForm = () => {
 			setPost(current);
 		} else {
 			setPost({
-				post: "",
+				item: "",
 				type: "question",
 			});
 		}
 	}, [postContext, current]);
 
 	const [post, setPost] = useState({
-		post: "",
+		item: "hyfv",
 		type: "question",
 	});
 
-	const {  type } = post;
+	const { item, type } = post;
 
-	const onChange = (e) => setPost({ ...post, [e.target.post]: e.target });
+	const onChange = (e) => setPost({ ...post, [e.target.post]: e.target.value });
 
 	const onSubmit = (e) => {
 		e.preventDefault();
@@ -45,10 +45,11 @@ const PostForm = () => {
 			<h2 className="text-primary">{current ? "Edit Post" : "Add Post"}</h2>
 			<input
 				type="text"
-				placeholder="Query..."
-				name="post"
-				value={post}
+				placeholder="Query"
+				name="item"
+				value={item}
 				onChange={onChange}
+				style= {{height: "200px"}}
 			/>
 			<h5 className="text-dark">Post Type</h5>
 			<input

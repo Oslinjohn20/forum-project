@@ -6,7 +6,7 @@ const PostSchema = mongoose.Schema({
 		ref: "posts",
 	},
 
-	post: {
+	item: {
 		type: String,
 		
 	},

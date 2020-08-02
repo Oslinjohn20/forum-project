@@ -1,6 +1,6 @@
 import React, { Fragment, useContext, useEffect } from "react";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
-import Spinner from "../layout/Spinner"
+import Spinner from "../layout/Spinner";
 import PostItem from "./PostItem";
 import PostContext from "../../context/post/postContext";
 
@@ -13,6 +13,8 @@ const Posts = () => {
 		getPosts();
 		// eslint-disable-next-line
 	}, []);
+
+	
 
 	return (
 		<Fragment>
@@ -36,7 +38,7 @@ const Posts = () => {
 							>
 								<PostItem post={post} />
 							</CSSTransition>
-						  ))}
+					    ))}
 				</TransitionGroup>
 			) : (
 				<Spinner />
