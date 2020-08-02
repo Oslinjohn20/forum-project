@@ -2,7 +2,7 @@ import React from "react";
 
 function About() {
 	return (
-		<div>
+		<div className= "text-dark">
 			<h1>About this web application</h1>
 			<p>
 				This is a fullstack application which is connected to a server as a

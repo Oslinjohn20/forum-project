@@ -1,4 +1,5 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect, Fragment } from "react";
+import { Link } from "react-router-dom";
 import AuthContext from "../../context/auth/authContext";
 import AlertContext from "../../context/alert/alertContext";
 
@@ -45,7 +46,10 @@ const Login = (props) => {
 	return (
 		<div className="form-container">
 			<h1>
-				Account <span className="text-primary">Login</span>
+				Account{" "}
+				<span className="text-primary">
+					Login <i className="fas fa-sign-in-alt" />{" "}
+				</span>
 			</h1>
 			<form onSubmit={onSubmit}>
 				<div className="form-group">
@@ -75,6 +79,15 @@ const Login = (props) => {
 					className="btn btn-success btn-block"
 				/>
 			</form>
+
+			<Fragment>
+				<button
+					className="btn btn-success btn-block"
+					style={{ marginBottom: "10px" }}
+				>
+					<Link to="/register">Register</Link>
+				</button>
+			</Fragment>
 		</div>
 	);
 };

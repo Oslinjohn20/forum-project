@@ -2,14 +2,18 @@ import React, { Fragment, useContext } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import AuthContext from "../../context/auth/authContext";
+import PostContext from "../../context/post/postContext";
 
-const Navbar = ({ title }) => {
+const Navbar = ({ title, icon }) => {
 	const authContext = useContext(AuthContext);
+	const postContext = useContext(PostContext);
 
 	const { isAuthenticated, logout, user } = authContext;
+	const { clearPosts } = postContext;
 
 	const onLogout = () => {
 		logout();
+		clearPosts();
 	};
 
 	const authLinks = (
@@ -30,20 +34,33 @@ const Navbar = ({ title }) => {
 	const guestLinks = (
 		<Fragment>
 			<li>
-				<Link to="/register">Register</Link>
+				<Link to="/register">
+					Register
+					<i className="fas fa-user-plus" />{" "}
+				</Link>{" "}
 			</li>
 			<li>
-				<Link to="/login">Login</Link>
+				<Link to="/login">
+					{" "}
+					Login
+					<i className="fas fa-sign-in-alt" />{" "}
+				</Link>
 			</li>
 			<li>
-				<Link to="/about">About</Link>
+				<Link to="/about">
+					About
+					<i className="fas fa-info-circle"/>
+				</Link>
 			</li>
 		</Fragment>
 	);
 
 	return (
 		<div className="navbar bg-primary">
-			<h1>{title}</h1>
+			<h1>
+				{title}{" "}
+				<i className={icon} />
+			</h1>
 			<ul>{isAuthenticated ? authLinks : guestLinks}</ul>
 		</div>
 	);
@@ -51,10 +68,12 @@ const Navbar = ({ title }) => {
 
 Navbar.propTypes = {
 	title: PropTypes.string.isRequired,
+	icon: PropTypes.string,
 };
 
 Navbar.defaultProps = {
 	title: "Wrench Forum",
+	icon: "fas fa-wrench",
 };
 
 export default Navbar;

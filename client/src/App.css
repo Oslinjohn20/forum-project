@@ -21,8 +21,9 @@ body {
 	line-height: 1.6;
 	background-color:rgba(0, 0, 0, 0.1);	
 	background-size: cover;
+	background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSu7ugo18Zgl0W00itJKemZTx9TkJ7VoRai7Q&usqp=CAU);
 	background-repeat: no-repeat;
-	color: #333;
+	color: black;
 }
 
 a {
@@ -303,7 +304,7 @@ input {
 .form-text {
 	display: block;
 	margin-top: 0.3rem;
-	color: #888;
+	color: whitesmoke;
 }
 
 input[type="text"],

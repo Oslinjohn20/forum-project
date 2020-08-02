@@ -8,23 +8,23 @@ const PostForm = () => {
 
 	useEffect(() => {
 		if (current !== null) {
-			setPost(current);
+			setCurrent(current);
 		} else {
-			setPost({
+			setCurrent({
 				item: "",
 				type: "question",
 			});
 		}
 	}, [postContext, current]);
 
-	const [post, setPost] = useState({
-		item: "hyfv",
+	const [post, setCurrent] = useState({
+		item: "",
 		type: "question",
 	});
 
 	const { item, type } = post;
 
-	const onChange = (e) => setPost({ ...post, [e.target.post]: e.target.value });
+	const onChange = (e) => setCurrent({ ...post, [e.target.post]: e.target.value });
 
 	const onSubmit = (e) => {
 		e.preventDefault();
