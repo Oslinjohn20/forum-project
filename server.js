@@ -9,8 +9,6 @@ connectDB();
 // Init Middleware
 app.use(express.json({ extended: false }));
 
-app.get("/", (req, res) => res.json({ msg: "Welcome to the wrench forum..." }));
-
 const PORT = process.env.PORT || 5000;
 
 // Define Routes
@@ -24,8 +22,9 @@ if (process.env.NODE_ENV === "production") {
     app.use(express.static("client/build"));
 
     app.get("*", (req,res) => res.sendFile(path.resolve(__dirname, "client", "build", "index.html")))
+} else {
+
+    app.get("/", (req, res) => res.json({ msg: "Welcome to the wrench forum..." }));
 }
-
-
 
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));

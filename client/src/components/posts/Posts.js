@@ -18,7 +18,7 @@ const Posts = () => {
 
 	return (
 		<Fragment>
-			{posts !== null && !loading ? (
+			{posts !== undefined && !loading ? (
 				<TransitionGroup>
 					{filtered !== null
 						? filtered.map((post) => (
