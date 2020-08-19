@@ -1,88 +1,47 @@
 const express = require("express");
 const router = express.Router();
-const auth = require("../middleware/auth");
-const { check, validationResult } = require("express-validator");
 
-const User = require("../models/User");
+const { validationResult } = require("express-validator");
+
 const Post = require("../models/Post");
 
 // @route   GET api/posts
 // @desc    Get all posts
 // @access  Public
-router.get("/", auth, async (req, res) => {
+router.get("/", async (req, res) => {
 	try {
-		const posts = await Post.find({ user: req.user.id }).sort({
-			date: -1,
-		});
+		const posts = await Post.find();
 		res.json(posts);
 	} catch (err) {
-		console.error(err.message);
-		res.status(400).json({ errors: errors.array() });
+		res.status(500).err(err);
 	}
 });
 
 // @route   POST api/posts
 // @desc    Add a new post
 // @access  Public
-router.post(
-	"/",[auth,
-	[check("item", "Item is required").not().isEmpty()]],
-	async (req, res) => {
-		const errors = validationResult(req);
-		if (!errors.isEmpty()) {
-			return res.status(400).json({ errors: errors.array() });
-		}
+router.post("/", async (req, res) => {
+	const { posts, type } = req.body;
 
-		const { item, type } = req.body;
-
-		try {
-			const newPost = new Post({
-				item,
-				type,
-				user: req.user.id,
-			});
-
-			const post = await newPost.save();
-
-			res.json({ type, item });
-		} catch (err) {
-			console.error(err.message);
-			res.status(500).send("Server Error");
-		}
+	// Checking for any Errors
+	if (!posts) {
+		return res.status(400).json({msg: "No posts found" });
+	} else if (!type) {
+		return res.status(400).json({msg:"No type is shown "})
 	}
-);
-
-// @route   PUT api/posts/:id
-// @desc    Update post
-// @access  Public
-router.put("/:id", auth, async (req, res) => {
-	const { item, type } = req.body;
-
-	//Post object
-	const postFields = {};
-	if (item) postFields.item = item;
-	if (type) postFields.type = type;
 
 	try {
-		let post = await Post.findById(req.params.id);
+		const newPost = new Post({
+			posts,
+			type,
+		});
 
-		if (!post) return res.status(404).json({ msg: "Post not found" });
+		const savedPost = await newPost.save();
 
-		// Make sure user owns post
-		if (post.user.toString() !== req.user.id) {
-			return res.status(401).json({ msg: "Not Authorized " });
-		}
-
-		post = await Post.findByIdAndUpdate(
-			req.params.id,
-			{ $set: postFields },
-			{ new: true }
-		);
-
-		res.json(post);
+		res.json(savedPost);
 	} catch (err) {
-		console.error(err.message);
-		res.status(500).send("Server Error");
+		console.log(err);
+		res.status(500).json(err);
 	}
 });
 

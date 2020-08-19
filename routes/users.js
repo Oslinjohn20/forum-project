@@ -13,6 +13,7 @@ const User = require("../models/User");
 router.post(
 	"/",
 	[
+		// Checking that every field has been filled in
 		check("name", "Please add name").not().isEmpty(),
 		check("email", "Please include a valid email").isEmail(),
 		check(
@@ -35,6 +36,7 @@ router.post(
 				return res.status(400).json({ msg: "User already exist " });
 			}
 
+			// Creating a New User 
 			user = new User({
 				name,
 				email,
